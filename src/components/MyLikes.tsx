@@ -16,7 +16,7 @@ import {
 import { format, isToday } from 'date-fns';
 import TextArea from 'antd/es/input/TextArea';
 // Replace this URL with your actual endpoint
-const API_URL = 'http://localhost:3000/api/users';
+const API_URL = 'https://backend-8ut5.onrender.com/api/users';
 interface Post {
     _id: string;
     creatorName: string;
@@ -57,7 +57,7 @@ const MyLikes = () => {
     };
 
     const toggleLike = async (postId: string) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/like`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/like`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const MyLikes = () => {
     };
 
     const toggleBookmark = async (postId: string) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/bookmark`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/bookmark`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const MyLikes = () => {
     };
 
     const handleDeletePost = async (postId: string) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}`, {
             method: 'DELETE',
         });
         if (response.ok) {
@@ -99,7 +99,7 @@ const MyLikes = () => {
     };
 
     const handleUpdatePost = async (postId: string, values: { title: string; content: string }) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ const MyLikes = () => {
 
     const handleAddComment = async (postId: string, commentText: string) => {
         console.log("username", user?.username)
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/comment`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/comment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

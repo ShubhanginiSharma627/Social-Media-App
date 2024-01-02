@@ -57,7 +57,7 @@ const MyBookmarks = () => {
     };
 
     const toggleLike = async (postId: string) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/like`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/like`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const MyBookmarks = () => {
     };
 
     const toggleBookmark = async (postId: string) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/bookmark`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/bookmark`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const MyBookmarks = () => {
     };
 
     const handleDeletePost = async (postId: string) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}`, {
             method: 'DELETE',
         });
         if (response.ok) {
@@ -99,7 +99,7 @@ const MyBookmarks = () => {
     };
 
     const handleUpdatePost = async (postId: string, values: { title: string; content: string }) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ const MyBookmarks = () => {
 
     const handleAddComment = async (postId: string, commentText: string) => {
         console.log("username", user?.username)
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/comment`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/comment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

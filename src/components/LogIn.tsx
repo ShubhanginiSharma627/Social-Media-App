@@ -12,7 +12,7 @@ const LogIn: React.FC = () => {
     console.log('Received values:', values);
     const { email, password } = values;
     try {
-        const response = await fetch('http://localhost:3000/api/users/authenticate', {
+        const response = await fetch('https://backend-8ut5.onrender.com/api/users/authenticate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

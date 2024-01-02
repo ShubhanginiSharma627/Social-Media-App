@@ -36,7 +36,7 @@ const MyProfile: React.FC = () => {
       
        if (user?.id){
         try {
-            const response = await fetch(`http://localhost:3000/api/users/update/${user?.id}`, {
+            const response = await fetch(`https://backend-8ut5.onrender.com/api/users/update/${user?.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json', // Add this line

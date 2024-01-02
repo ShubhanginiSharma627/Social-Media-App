@@ -54,7 +54,7 @@ const MyPosts: React.FC = () => {
   }, [user?.id]); // Rerun the effect if userId changes
 
   const fetchUserPosts = async () => {
-    const response = await fetch(`http://localhost:3000/api/posts/by-user/${user?.id}`);
+    const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/by-user/${user?.id}`);
     if (response.ok) {
       const data = await response.json();
       console.log("data",data)

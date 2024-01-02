@@ -45,7 +45,7 @@ const Home: React.FC = () => {
         fetchPosts();
     }, []);
     const fetchPosts = async () => {
-        const response = await fetch('http://localhost:3000/api/posts');
+        const response = await fetch('https://backend-8ut5.onrender.com/api/posts');
         if (response.ok) {
             const data = await response.json();
             console.log("data", data)
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
     };
 
     const handleCreatePost = async (values: { title: string; content: string }) => {
-        const response = await fetch('http://localhost:3000/api/posts', {
+        const response = await fetch('https://backend-8ut5.onrender.com/api/posts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const Home: React.FC = () => {
     };
 
     const toggleLike = async (postId: string) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/like`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/like`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ const Home: React.FC = () => {
     };
 
     const toggleBookmark = async (postId: string) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/bookmark`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/bookmark`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ const Home: React.FC = () => {
     };
 
     const handleDeletePost = async (postId: string) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}`, {
             method: 'DELETE',
         });
         if (response.ok) {
@@ -130,7 +130,7 @@ const Home: React.FC = () => {
     };
 
     const handleUpdatePost = async (postId: string, values: { title: string; content: string }) => {
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ const Home: React.FC = () => {
 
     const handleAddComment = async (postId: string, commentText: string) => {
         console.log("username", user?.username)
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/comment`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/comment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

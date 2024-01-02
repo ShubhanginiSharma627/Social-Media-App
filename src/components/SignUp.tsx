@@ -15,7 +15,7 @@ const SignUp: React.FC = () => {
     const { fullname, email, password } = values; // Extract the values from the form
 
     try {
-      const response = await fetch('http://localhost:3000/api/users/register', {
+      const response = await fetch('https://backend-8ut5.onrender.com/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
