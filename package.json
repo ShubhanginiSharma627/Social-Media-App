@@ -25,7 +25,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "lint:css": "stylelint '**/*.css'",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -33,6 +36,9 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "browserslist": {
     "production": [
@@ -45,5 +51,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^13.6.2",
+    "jest": "^27.5.1",
+    "stylelint": "^16.1.0",
+    "stylelint-config-standard": "^36.0.0"
   }
 }
