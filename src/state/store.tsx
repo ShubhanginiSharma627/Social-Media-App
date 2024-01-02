@@ -2,8 +2,8 @@ import create from 'zustand'
 import { persist } from 'zustand/middleware'
 
 type UserState = {
-    user: { username: string; email: string; image: string } | null;
-    setUser: (user: { username: string; email: string; image: string }) => void;
+    user: { id:string,username: string; email: string; picture: string } | null;
+    setUser: (user: { id:string, username: string; email: string; picture: string }) => void;
     clearUser: () => void;
   }
 

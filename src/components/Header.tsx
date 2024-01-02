@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import useBearStore from '../state/state';
 import { Typography, Button, Alert } from 'antd';
+import useUserStore from '../state/store';
 
 const { Title } = Typography;
 
 const Header = () => {
   const [showAlert, setShowAlert] = useState(false);
   const setIsUserValid = useBearStore((state:any) => state.setIsUserValid);
-
+  const {clearUser} = useUserStore()
   const logout = () => {
     setShowAlert(false);
     setIsUserValid(false);
+    clearUser()
     // Implement actual logout logic here
   };
 

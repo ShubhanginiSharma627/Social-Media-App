@@ -20,7 +20,7 @@ const SignUp: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: fullname, email, password }), // Ensure these match your backend's expected parameters
+        body: JSON.stringify({ fullname, email, password }), // Ensure these match your backend's expected parameters
       });
 
       if (!response.ok) {
@@ -40,10 +40,7 @@ const SignUp: React.FC = () => {
 
       const result = await response.json();
       console.log('Success:', result);
-      setUser({
-          username: fullname, email,
-          image: ''
-      });
+      setUser(result.user);
       setIsUserValid(true); // Assuming registration automatically logs the user in
       navigate('/home'); // Navigate to home page or wherever appropriate
     } catch (error) {

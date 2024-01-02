@@ -26,10 +26,7 @@ const LogIn: React.FC = () => {
   
         const result = await response.json();
         console.log('Logged in successfully:', result);
-        setUser({
-            username: result.user.username, email,
-            image: ''
-        });
+        setUser(result.user);
         setIsUserValid(true)
         navigate('/home');
         // Handle success - save token, redirect, etc.

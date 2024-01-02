@@ -12,10 +12,10 @@ function App() {
       <div style={{ margin: '20px' }}> {/* Adjust the '20px' to whatever margin you prefer */}
       <Header />
       <div style={{ display: 'flex' }}>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 0.5 }}>
           <CustomLayout />
         </div>
-        <div style={{ flex: 2 }}>
+        <div style={{ flex: 2,marginLeft:"20px",alignItems:"flex-start"}}>
           <Outlet />
         </div>
       </div>

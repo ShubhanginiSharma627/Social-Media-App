@@ -1,35 +1,82 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
+import useUserStore from '../state/store';
 
 const columns = [
-  {
-    title: 'Content',
-    dataIndex: 'content',
-    key: 'content',
-  },
-  {
-    title: 'Date',
-    dataIndex: 'date',
-    key: 'date',
-  },
-  // Add more columns as needed
-];
+    {
+      title: 'Post Number',
+      dataIndex: 'key',
+      key: 'key',
+    },
+    {
+      title: 'Title',
+      dataIndex: 'title', // Assuming 'title' is the field name in your data
+      key: 'title',
+    },
+    {
+      title: 'Description',
+      dataIndex: 'description', // Assuming 'description' is the field name in your data
+      key: 'description',
+    },
+    {
+      title: 'Date',
+      dataIndex: 'date',
+      key: 'date',
+    },
+    // Add more columns as needed
+  ];
+  interface Post {
+    _id: string;
+    creatorName: string;
+    creatorEmail: string;
+    title: string;
+    creationDateTime: string;
+    description: string;
+    likes: string[];
+    bookmarks: string[];
+    comments: { body: string; commenterEmail: string,commenterUsername:string,date:string }[];
+  }
+
+  interface TableData {
+    title: string;
+    creationDateTime: string;
+    content: string;
+  }
 
 const MyPosts: React.FC = () => {
-  // Assuming you have a list of user's posts, replace it with your actual data
-  const userPosts = [
-    { key: '1', content: 'User post 1', date: '2023-01-01' },
-    { key: '2', content: 'User post 2', date: '2023-01-02' },
-    // Add more user posts
-  ];
+  const [posts, setPosts] = useState<TableData[]>([]);
+  const { user } = useUserStore();
 
+  useEffect(() => {
+    
+
+    fetchUserPosts();
+  }, [user?.id]); // Rerun the effect if userId changes
+
+  const fetchUserPosts = async () => {
+    const response = await fetch(`http://localhost:3000/api/posts/by-user/${user?.id}`);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("data",data)
+      // Remap data if necessary to fit the table format
+      const formattedData = data.map((item: Post, index: number) => ({
+        key: index + 1,
+        title: item.title,
+        description: item.description,
+        date: item.creationDateTime, // Adjust based on your actual date field
+      }));
+      console.log("posted",formattedData)
+      setPosts(formattedData);
+    } else {
+      console.error("Failed to fetch posts:", response.status);
+    }
+  };
   return (
     <div>
-      <h1>My Posts</h1>
-      <Table columns={columns} dataSource={userPosts} />
+      <h1 style={{marginTop:0}}>My Posts</h1>
+      <Table columns={columns} dataSource={posts} />
     </div>
   );
 };
 
 export default MyPosts;
-

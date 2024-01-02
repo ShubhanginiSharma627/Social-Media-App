@@ -12,7 +12,6 @@ import MyPosts from './components/MyPosts';
 import MyProfile from './components/MyProfile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
-import LogOut from './components/LogOut';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -29,7 +28,6 @@ root.render(
         </Route>
         <Route path="signup" Component={SignUp} />
         <Route path="login" Component={LogIn} />
-        <Route path="logout" Component={LogOut} />
         <Route path='*' element={<Navigate to={"login"} />} />
          
       </Routes>
