@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Outlet, Navigate } from 'react-router-dom';
+import Header from './components/Header';
+import CustomLayout from './components/Layout';
+import useBearStore from './state/state';
+
 
 function App() {
+  const isUserValid = useBearStore((state:any) => state.isUserValid);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    isUserValid ? (
+      <div style={{ margin: '20px' }}> {/* Adjust the '20px' to whatever margin you prefer */}
+      <Header />
+      <div style={{ display: 'flex' }}>
+        <div style={{ flex: 1 }}>
+          <CustomLayout />
+        </div>
+        <div style={{ flex: 2 }}>
+          <Outlet />
+        </div>
+      </div>
     </div>
+    
+    ) : (
+      <Navigate to={"/login"} />
+    )
   );
 }
 
