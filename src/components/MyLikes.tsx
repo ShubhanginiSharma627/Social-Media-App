@@ -159,27 +159,27 @@ const MyLikes = () => {
                         style={{ maxWidth: '80%', margin: '20px auto' }}
                         actions={[
                             <Tooltip title="Like">
-                                <Button
+                                <Button style={{border:"none"}}
                                     icon={post.likes.includes(user?.email || '') ? <LikeFilled /> : <LikeOutlined />}
                                     onClick={() => toggleLike(post._id)}
                                 >{post.likes.length}</Button>
                             </Tooltip>,
                             <Tooltip title="Bookmark">
-                                <Button
+                                <Button style={{border:"none"}}
                                     icon={post.bookmarks.includes(user?.email || '') ? <BookFilled /> : <BookOutlined />}
                                     onClick={() => toggleBookmark(post._id)}
                                 >{post.bookmarks.length}</Button>
                             </Tooltip>,
                             <Tooltip title="Add Comment">
-                                <Button icon={<CommentOutlined />} onClick={() => openCommentModal(post)}>{post.comments.length}</Button>
+                                <Button icon={<CommentOutlined />} style={{border:"none"}} onClick={() => openCommentModal(post)}>{post.comments.length}</Button>
                             </Tooltip>,
                             user?.email === post.creatorEmail && (
                                 <Space>
                                     <Tooltip title="Edit">
-                                        <Button icon={<EditOutlined />} onClick={() => handleUpdatePost(post._id, { title: post.title, content: post.content })}></Button>
+                                        <Button icon={<EditOutlined />} style={{border:"none"}} onClick={() => handleUpdatePost(post._id, { title: post.title, content: post.content })}></Button>
                                     </Tooltip>
                                     <Tooltip title="Delete">
-                                        <Button icon={<DeleteOutlined />} onClick={() => handleDeletePost(post._id)}></Button>
+                                        <Button icon={<DeleteOutlined />} style={{border:"none"}}  onClick={() => handleDeletePost(post._id)}></Button>
                                     </Tooltip>
                                 </Space>
                             ),
@@ -187,11 +187,11 @@ const MyLikes = () => {
                     >
                         {
                             user?.picture ? (
-                                <div>
+                                <div style={{display:"flex",flexDirection:"row"}}>
                                     <img
                                         src={user?.picture}
                                         alt="Profile"
-                                        style={{ maxWidth: '100px', maxHeight: '100px', borderRadius: "15px" }}
+                                        style={{ maxWidth: '50px', maxHeight: '50px', borderRadius: "50%" }}
                                     />
                                     <div>
                                         <h4>{post.creatorName} - {post.title}</h4>

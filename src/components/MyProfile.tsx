@@ -106,7 +106,7 @@ const MyProfile: React.FC = () => {
                             <img
                                 src={userData?.picture}
                                 alt="Profile"
-                                style={{ maxWidth: '100px', maxHeight: '100px',borderRadius:"15px" }}
+                                style={{ maxWidth: '50px', maxHeight: '50px', borderRadius: "50%" }}
                             />
                         )}
                     </Form.Item>
