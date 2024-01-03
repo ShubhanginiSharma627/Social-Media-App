@@ -1,6 +1,9 @@
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
-
+type BearStore = {
+  isUserValid: boolean; // Type for isUserValid
+  setIsUserValid: (isValid: boolean) => void; // Type for setIsUserValid action
+};
 const useBearStore = create(persist(
   (set) => ({
     isUserValid: false, // default state
