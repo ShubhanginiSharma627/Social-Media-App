@@ -103,6 +103,7 @@ const MyLikes = () => {
         });
         if (response.ok) {
             fetchLikedPosts(); // Re-fetch posts after updating
+            setEditPostModalVisible(false)
         } else {
             console.error(`Failed to update post: ${response.status}`);
         }

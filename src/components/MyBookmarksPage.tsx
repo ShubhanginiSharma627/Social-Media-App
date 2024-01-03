@@ -105,6 +105,7 @@ const MyBookmarks = () => {
         });
         if (response.ok) {
             fetchbookmarkedPosts(); // Re-fetch posts after updating
+            setEditPostModalVisible(false)
         } else {
             console.error(`Failed to update post: ${response.status}`);
         }
