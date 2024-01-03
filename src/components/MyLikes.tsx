@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Card, Avatar, Button, List, Tooltip, Space, FormInstance, Form, Modal } from 'antd';
+import { Card, Avatar, Button, List, Tooltip, Space, FormInstance, Form, Modal, Input } from 'antd';
 import useUserStore from '../state/store';
 import Meta from 'antd/es/card/Meta';
 import {
@@ -24,6 +24,8 @@ const MyLikes = () => {
     const [commentModalVisible, setCommentModalVisible] = useState<boolean>(false);
     const [selectedPost, setSelectedPost] = useState<Post | null>(null);
     const commentFormRef = useRef<FormInstance>(null);
+    const [editPostModalVisible, setEditPostModalVisible] = useState<boolean>(false);
+    const [editingPost, setEditingPost] = useState<Post | null>(null);
     useEffect(() => {
 
         fetchLikedPosts();
@@ -88,7 +90,7 @@ const MyLikes = () => {
         }
     };
 
-    const handleUpdatePost = async (postId: string, values: { title: string; content: string }) => {
+    const handleUpdatePost = async (postId: string | undefined, values: { title: string | undefined; content: string |undefined }) => {
         const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}`, {
             method: 'PUT',
             headers: {
@@ -166,7 +168,10 @@ const MyLikes = () => {
                             user?.email === post.creatorEmail && (
                                 <Space>
                                     <Tooltip title="Edit">
-                                        <Button icon={<EditOutlined />} style={{border:"none"}} onClick={() => handleUpdatePost(post._id, { title: post.title, content: post.description })}></Button>
+                                    <Button icon={<EditOutlined />} style={{ border: "none" }} onClick={() => {
+                                            setEditingPost(post);
+                                            setEditPostModalVisible(true);
+                                        }}></Button>
                                     </Tooltip>
                                     <Tooltip title="Delete">
                                         <Button icon={<DeleteOutlined />} style={{border:"none"}}  onClick={() => handleDeletePost(post._id)}></Button>
@@ -235,6 +240,30 @@ const MyLikes = () => {
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit">Add Comment</Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+            <Modal
+                title="Edit Post"
+                visible={editPostModalVisible}
+                onCancel={() => setEditPostModalVisible(false)}
+                footer={null}
+            >
+                <Form
+                    initialValues={{
+                        title: editingPost?.title,
+                        content: editingPost?.description,
+                    }}
+                    onFinish={() => handleUpdatePost(editingPost?._id, { title: editingPost?.title, content: editingPost?.description })}
+                >
+                    <Form.Item name="title" rules={[{ required: true, message: 'Please input the title!' }]}>
+                        <Input placeholder="Title" />
+                    </Form.Item>
+                    <Form.Item name="content" rules={[{ required: true, message: 'Please input the content!' }]}>
+                        <TextArea rows={4} placeholder="Content" />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit">Update Post</Button>
                     </Form.Item>
                 </Form>
             </Modal>

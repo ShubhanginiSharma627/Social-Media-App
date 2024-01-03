@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Card, Avatar, Button, List, Tooltip, Space, FormInstance, Form, Modal } from 'antd';
+import { Card, Avatar, Button, List, Tooltip, Space, FormInstance, Form, Modal, Input } from 'antd';
 import useUserStore from '../state/store';
 import Meta from 'antd/es/card/Meta';
 import {
@@ -25,6 +25,9 @@ const MyBookmarks = () => {
     const [commentModalVisible, setCommentModalVisible] = useState<boolean>(false);
     const [selectedPost, setSelectedPost] = useState<Post | null>(null);
     const commentFormRef = useRef<FormInstance>(null);
+    const [editPostModalVisible, setEditPostModalVisible] = useState<boolean>(false);
+    const [editingPost, setEditingPost] = useState<Post | null>(null);
+    const { TextArea } = Input;
     useEffect(() => {
 
         fetchbookmarkedPosts();
@@ -89,7 +92,7 @@ const MyBookmarks = () => {
         }
     };
 
-    const handleUpdatePost = async (postId: string, values: { title: string; content: string }) => {
+    const handleUpdatePost = async (postId: string | undefined, values: { title: string | undefined; content: string | undefined }) => {
         const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}`, {
             method: 'PUT',
             headers: {
@@ -111,7 +114,7 @@ const MyBookmarks = () => {
         setSelectedPost(post);
         setCommentModalVisible(true);
     };
-
+ 
     const closeCommentModal = () => {
         setCommentModalVisible(false);
         setSelectedPost(null);
@@ -150,27 +153,30 @@ const MyBookmarks = () => {
                         style={{ maxWidth: '80%', margin: '20px auto' }}
                         actions={[
                             <Tooltip title="Like">
-                                <Button style={{border:"none"}}
+                                <Button style={{ border: "none" }}
                                     icon={post.likes.includes(user?.email || '') ? <LikeFilled /> : <LikeOutlined />}
                                     onClick={() => toggleLike(post._id)}
                                 >{post.likes.length}</Button>
                             </Tooltip>,
                             <Tooltip title="Bookmark">
-                                <Button style={{border:"none"}}
+                                <Button style={{ border: "none" }}
                                     icon={post.bookmarks.includes(user?.email || '') ? <BookFilled /> : <BookOutlined />}
                                     onClick={() => toggleBookmark(post._id)}
                                 >{post.bookmarks.length}</Button>
                             </Tooltip>,
                             <Tooltip title="Add Comment">
-                                <Button style={{border:"none"}} icon={<CommentOutlined />} onClick={() => openCommentModal(post)}>{post.comments.length}</Button>
+                                <Button style={{ border: "none" }} icon={<CommentOutlined />} onClick={() => openCommentModal(post)}>{post.comments.length}</Button>
                             </Tooltip>,
                             user?.email === post.creatorEmail && (
                                 <Space>
                                     <Tooltip title="Edit">
-                                        <Button icon={<EditOutlined />} style={{border:"none"}} onClick={() => handleUpdatePost(post._id, { title: post.title, content: post.description })}></Button>
+                                        <Button icon={<EditOutlined />} style={{ border: "none" }} onClick={() => {
+                                            setEditingPost(post);
+                                            setEditPostModalVisible(true);
+                                        }}></Button>
                                     </Tooltip>
                                     <Tooltip title="Delete">
-                                        <Button icon={<DeleteOutlined />} style={{border:"none"}} onClick={() => handleDeletePost(post._id)}></Button>
+                                        <Button icon={<DeleteOutlined />} style={{ border: "none" }} onClick={() => handleDeletePost(post._id)}></Button>
                                     </Tooltip>
                                 </Space>
                             ),
@@ -178,7 +184,7 @@ const MyBookmarks = () => {
                     >
                         {
                             user?.picture ? (
-                                <div style={{display:"flex",flexDirection:"row"}}>
+                                <div style={{ display: "flex", flexDirection: "row" }}>
                                     <img
                                         src={user?.picture}
                                         alt="Profile"
@@ -236,6 +242,31 @@ const MyBookmarks = () => {
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit">Add Comment</Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
+            <Modal
+                title="Edit Post"
+                visible={editPostModalVisible}
+                onCancel={() => setEditPostModalVisible(false)}
+                footer={null}
+            >
+                <Form
+                    initialValues={{
+                        title: editingPost?.title,
+                        content: editingPost?.description,
+                    }}
+                    onFinish={() => handleUpdatePost(editingPost?._id, { title: editingPost?.title, content: editingPost?.description })}
+                >
+                    <Form.Item name="title" rules={[{ required: true, message: 'Please input the title!' }]}>
+                        <Input placeholder="Title" />
+                    </Form.Item>
+                    <Form.Item name="content" rules={[{ required: true, message: 'Please input the content!' }]}>
+                        <TextArea rows={4} placeholder="Content" />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit">Update Post</Button>
                     </Form.Item>
                 </Form>
             </Modal>
