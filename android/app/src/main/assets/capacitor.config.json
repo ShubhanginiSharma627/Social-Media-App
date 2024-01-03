@@ -1,0 +1,8 @@
+{
+	"appId": "com.example.app",
+	"appName": "social-media-app",
+	"webDir": "build",
+	"server": {
+		"androidScheme": "https"
+	}
+}
