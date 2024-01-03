@@ -16,7 +16,7 @@ import {
 import { format, isToday } from 'date-fns';
 import TextArea from 'antd/es/input/TextArea';
 // Replace this URL with your actual endpoint
-const API_URL = 'http://localhost:3000/api/users';
+const API_URL = 'https://backend-8ut5.onrender.com/api/users';
 interface Post {
     _id: string;
     creatorName: string;
