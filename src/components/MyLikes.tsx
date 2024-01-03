@@ -15,19 +15,9 @@ import {
 } from '@ant-design/icons';
 import { format, isToday } from 'date-fns';
 import TextArea from 'antd/es/input/TextArea';
+import { Post } from '../types/posts';
 // Replace this URL with your actual endpoint
 const API_URL = 'https://backend-8ut5.onrender.com/api/users';
-interface Post {
-    _id: string;
-    creatorName: string;
-    creatorEmail: string;
-    title: string;
-    creationDateTime: string;
-    content: string;
-    likes: string[];
-    bookmarks: string[];
-    comments: { body: string; commenterEmail: string, commenterUsername: string, date: string }[];
-}
 const MyLikes = () => {
     const [likedPosts, setLikedPosts] = useState<Post[]>([]);
     const { user, setUser } = useUserStore();
@@ -176,7 +166,7 @@ const MyLikes = () => {
                             user?.email === post.creatorEmail && (
                                 <Space>
                                     <Tooltip title="Edit">
-                                        <Button icon={<EditOutlined />} style={{border:"none"}} onClick={() => handleUpdatePost(post._id, { title: post.title, content: post.content })}></Button>
+                                        <Button icon={<EditOutlined />} style={{border:"none"}} onClick={() => handleUpdatePost(post._id, { title: post.title, content: post.description })}></Button>
                                     </Tooltip>
                                     <Tooltip title="Delete">
                                         <Button icon={<DeleteOutlined />} style={{border:"none"}}  onClick={() => handleDeletePost(post._id)}></Button>
@@ -206,7 +196,7 @@ const MyLikes = () => {
                                 />
                             )
                         }
-                        <p>{post.content}</p>
+                        <p>{post.description}</p>
                     </Card>
                 )}
             />

@@ -3,26 +3,9 @@ import { Button, Table } from 'antd';
 import useUserStore from '../state/store';
 import { format, isToday } from 'date-fns';
 import Column from 'antd/es/table/Column';
+import { Post, TableData } from '../types/posts';
 
 
-interface Post {
-  _id: string;
-  creatorName: string;
-  creatorEmail: string;
-  title: string;
-  creationDateTime: string;
-  description: string;
-  likes: string[];
-  bookmarks: string[];
-  comments: { _id: string, body: string; commenterEmail: string, commenterUsername: string, date: string }[];
-}
-
-interface TableData {
-  title: string;
-  creationDateTime: string;
-  content: string;
-  comments: { _id: string, body: string; commenterEmail: string, commenterUsername: string, date: string }[];
-}
 
 const MyPosts: React.FC = () => {
   const [posts, setPosts] = useState<TableData[]>([]);

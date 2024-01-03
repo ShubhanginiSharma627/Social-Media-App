@@ -16,28 +16,12 @@ import {
 import { FormInstance } from 'antd/lib/form';
 import useUserStore from '../state/store'; // Adjust the import path to your store file
 import { format, isToday } from 'date-fns';
+import { Comment, Post } from '../types/posts';
 
 const { TextArea } = Input;
 const { Meta } = Card;
 
-interface Post {
-    _id: string;
-    creatorName: string;
-    creatorEmail: string;
-    title: string;
-    creationDateTime: string;
-    description: string;
-    likes: string[];
-    bookmarks: string[];
-    comments: { _id: string, body: string; commenterEmail: string, commenterUsername: string, date: string }[];
-}
-interface Comment {
-    _id: string,
-    body: string;
-    commenterEmail: string;
-    commenterUsername: string;
-    date: string;
-}
+
 const Home: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [createPostModalVisible, setCreatePostModalVisible] = useState<boolean>(false);
