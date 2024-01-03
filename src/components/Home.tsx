@@ -141,7 +141,7 @@ const Home: React.FC = () => {
 
     const handleDeleteComment = async (postId: string | undefined, commentId: string) => {
         // Assuming you have an endpoint to delete a specific comment by its id
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments/${commentId}`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/comments/${commentId}`, {
             method: 'DELETE',
         });
         if (response.ok) {
@@ -155,7 +155,7 @@ const Home: React.FC = () => {
 
     const handleEditComment = async (postId: string | undefined, commentId: string, updatedText: string) => {
         // Assuming you have an endpoint to update a specific comment by its id
-        const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments/${commentId}`, {
+        const response = await fetch(`https://backend-8ut5.onrender.com/api/posts/${postId}/comments/${commentId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
